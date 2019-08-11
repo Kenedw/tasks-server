@@ -1,11 +1,13 @@
 // schemas types
 interface UserType{
-  id: number;
-  firstName: string;
-  lastName: string;
+  id: string;
+  userName: string;
+  createAt: string;
+  email: string;
+  password: string;
 }
 interface PostType{
-  id: number;
+  id: string;
   userId: number;
   title: string;
   voter: number;

@@ -3,21 +3,23 @@ import { merge } from 'lodash';
 import { makeExecutableSchema } from 'graphql-tools';
 import { gql } from 'apollo-server-express';
 
-import { typeDefUsers, resolversUsers } from './users';
-import { typeDefPosts, resolversPosts } from './posts';
+import { typeDefUsers, resolversUsers } from './usersSchema';
+import { typeDefPosts, resolversPosts } from './postsSchema';
 
 export const typeDefs = gql`
   # the schema allows the following query:
   type Query {
-    posts: [Post]
-    user(id: Int!): User
+    _empty : String
   }
 
   # this schema allows the following mutation:
   type Mutation {
-    upvotePost (
-      postId: Int!
-    ): Post
+    _empty : String
+  }
+
+  # this schema allows the following subscription:
+  type Subscription {
+    _empty : String
   }
 `;
 

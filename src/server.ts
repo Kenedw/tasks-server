@@ -23,6 +23,7 @@ class App {
 
   private database (): void {
     mongoose.connect('mongodb+srv://root:kronusroot@cluster0-sderl.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true });
+    mongoose.connection.once('open', (): void => console.log(`Connected to mongoDB`));
   }
 
   private listen (): void{

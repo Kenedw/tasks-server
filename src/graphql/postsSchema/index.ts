@@ -9,18 +9,25 @@ const posts = [
   { id: 4, userId: 3, title: 'Launchpad is Cool', votes: 7 }
 ];
 const users = [
-  { id: 1, firstName: 'Tom', lastName: 'Coleman', email: 'Tom@email.com', password: '123456' },
-  { id: 2, firstName: 'Sashko', lastName: 'Stubailo', email: 'Sashko@email.com', password: '123456' },
-  { id: 3, firstName: 'Mikhail', lastName: 'Novikov', email: 'Mikhail@email.com', password: '123456' }
+  { id: 1, userName: 'Tom', lastName: 'Coleman', createdAt: '10/08/19', email: 'Tom@email.com', password: '123456' },
+  { id: 2, userName: 'Sashko', lastName: 'Stubailo', createdAt: '10/08/19', email: 'Sashko@email.com', password: '123456' },
+  { id: 3, userName: 'Mikhail', lastName: 'Novikov', createdAt: '10/08/19', email: 'Mikhail@email.com', password: '123456' }
 ];
 // posts.ts
 const typeDef = gql`
   type Post {
-    id: Int!
+    id: String!
     title: String
     user: User
     votes: Int
+  },
+  extend type Query {
+    posts: [Post]
+  },
+  extend type Mutation {
+    upvotePost (postId: String!): Post
   }
+  
 `;
 
 const resolvers = {
