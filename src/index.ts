@@ -1,7 +1,6 @@
-const world = '🗺️';
+import { ApolloServer } from 'apollo-server-express';
+import App from './server';
+import { schema } from './schemas';
 
-export function hello (word: string = world): string {
-  return `Hello ${word}! `;
-}
-
-console.log(hello());
+const server = new ApolloServer({ schema, playground: true });
+server.applyMiddleware({ app: App, path: '/graphql' });
