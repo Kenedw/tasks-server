@@ -1,7 +1,7 @@
-const world = '🗺️';
+import { ApolloServer } from 'apollo-server-express';
+import App from './server';
+import { schema } from './graphql';
+import depthLimit from 'graphql-depth-limit';
 
-export function hello (word: string = world): string {
-  return `Hello ${word}! `;
-}
-
-console.log(hello());
+const server = new ApolloServer({ schema, playground: true, validationRules: [depthLimit(6)] });
+server.applyMiddleware({ app: App, path: '/graphql' });
