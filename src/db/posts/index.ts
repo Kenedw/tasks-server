@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 import schema from './schema';
-import uniqueValidator from 'mongoose-unique-validator';
 
-class User {
-  private UserDB: mongoose.Model<mongoose.Document, {}>;
+class Post {
+  private PostDB: mongoose.Model<mongoose.Document, {}>;
 
-  private user = schema;
+  private post = schema;
 
   public constructor () {
     this.config();
@@ -13,17 +12,16 @@ class User {
   }
 
   private config (): void {
-    this.user.set('toObject', { virtuals: true });
-    this.user.plugin(uniqueValidator, { message: 'is already taken.' });
+    this.post.set('toObject', { virtuals: true });
   }
 
   private middleware (): void {
-    this.UserDB = mongoose.model('User', schema);
+    this.PostDB = mongoose.model('Post', schema);
   }
 
-  public async findOne (args: object): Promise<object> {
+  public async find (args: object): Promise<object> {
     try {
-      const response = await this.UserDB.findOne(args).exec();
+      const response = await this.PostDB.find(args).exec();
       console.log(response);
       return response;
     } catch (e) {
@@ -32,9 +30,9 @@ class User {
     }
   }
 
-  public async find (args: object): Promise<object> {
+  public async findOne (args: object): Promise<object> {
     try {
-      const response = await this.UserDB.find(args).exec();
+      const response = await this.PostDB.findOne(args).exec();
       console.log(response);
       return response;
     } catch (e) {
@@ -45,7 +43,7 @@ class User {
 
   public async create (args: object): Promise<object> {
     try {
-      const response = await this.UserDB.create(args);
+      const response = await this.PostDB.create(args);
       console.log(response);
       return response;
     } catch (e) {
@@ -55,4 +53,4 @@ class User {
   }
 }
 
-export default User;
+export default Post;

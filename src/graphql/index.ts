@@ -5,6 +5,8 @@ import { gql } from 'apollo-server-express';
 
 import { typeDefUsers, resolversUsers } from './usersSchema';
 import { typeDefPosts, resolversPosts } from './postsSchema';
+import { typeDefFolders, resolversFolders } from './foldersSchema';
+import { typeDefLists, resolversLists } from './listsSchema';
 
 export const typeDefs = gql`
   # the schema allows the following query:
@@ -24,6 +26,6 @@ export const typeDefs = gql`
 `;
 
 export const schema = makeExecutableSchema({
-  typeDefs: [typeDefs, typeDefUsers, typeDefPosts],
-  resolvers: merge(resolversUsers, resolversPosts)
+  typeDefs: [typeDefs, typeDefUsers, typeDefFolders, typeDefLists, typeDefPosts],
+  resolvers: merge(resolversUsers, resolversFolders, resolversLists, resolversPosts)
 });
